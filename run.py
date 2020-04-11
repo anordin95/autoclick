@@ -23,7 +23,9 @@ def get_sleep_time():
 	# sample from a gaussian distribution
 	mu = 0.8
 	sigma = 0.3
-	return random.gauss(mu, sigma)
+
+	# ensure no negative values are sent back.
+	return max(random.gauss(mu, sigma), 0)
 
 def continuously_click(click_location, runtime):
 	print(f"Continously clicking for {runtime} minutes...")
