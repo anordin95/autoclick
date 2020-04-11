@@ -4,10 +4,13 @@ from getkey import getkey
 import random
 import argparse
 
+CHANCE_TO_PERTURBATE_LOCATION = 0.3
+CHANCE_TO_TAKE_BREAK = 0.3
+CHANCE_TO_RANDOMLY_MOVE_MOUSE = 0.3
+
 class ClickLocation:
 
 	MARGIN_FOR_ERROR_PX = 3
-	CHANCE_TO_PERTURBATE = 0.05
 
 	def __init__(self, original_location):
 		'''
@@ -17,12 +20,12 @@ class ClickLocation:
 		self.original_location = original_location
 		self.current_location = original_location
 
-	def maybe_slightly_perturbate():
+	def maybe_slightly_perturbate(self):
 		'''
 		perturbate location, but ensure it stays within a 
 		margin for error of the original location
 		'''		
-		if random.random() >= self.CHANCE_TO_PERTURBATE:
+		if random.random() >= CHANCE_TO_PERTURBATE_LOCATION:
 			return
 		
 		print("Perturbating location...")
@@ -40,7 +43,7 @@ class ClickLocation:
 
 		self.current_location = pyautogui.Point(new_x, new_y)
 
-	def get_current_loc():
+	def get_current_loc(self):
 		return self.current_location
 
 
@@ -69,10 +72,9 @@ def get_sleep_time():
 	sigma = random.choice(sigmas)
 
 	# simulate human taking a break
-	break_probability = 0.003 
 	mu_break = 45
 	sigma_break = 10
-	if random.random() < break_probability:
+	if random.random() < CHANCE_TO_TAKE_BREAK:
 		print("Taking a (fake) break!")
 		mu = mu_break
 		sigma = sigma_break
@@ -90,10 +92,8 @@ def maybe_randomly_move_mouse(click_location):
 							y_distance_to_move,
 							duration = random.gauss(1.5, 0.3),
 							tween=pyautogui.easeInOutQuad)
-
-	p_random_mouse_move = 0.1
 	
-	if random.random() < p_random_mouse_move:
+	if random.random() < CHANCE_TO_RANDOMLY_MOVE_MOUSE:
 		print("Moving mouse randomly...")
 		_move_mouse_randomly()
 
