@@ -13,3 +13,9 @@ In the late, great words of Benjamin Franklin:
 ## Usage:
 
 `python run.py`
+
+#### Can specify runtime via CLI arg
+
+Run for 45 minutes:
+
+`python run.py --runtime 45`
