@@ -20,9 +20,22 @@ def setup_click_location():
 	return click_location
 
 def get_sleep_time():
-	# sample from a gaussian distribution
-	mu = 0.8
-	sigma = 0.3
+	# distribution params
+	mus = [0.8, 0.6, 1.1]
+	sigmas = [0.2, 0.3, 0.4]
+
+	# randomly select a distribution 
+	mu = random.choice(mus)
+	sigma = random.choice(sigmas)
+
+	# simulate human taking a break
+	break_probability = 0.005
+	mu_break = 45
+	sigma_break = 10
+	if random.random() < break_probability:
+		print("Taking a (fake) break!")
+		mu = mu_break
+		sigma = sigma_break
 
 	# ensure no negative values are sent back.
 	return max(random.gauss(mu, sigma), 0)
