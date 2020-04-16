@@ -10,7 +10,8 @@ CHANCE_TO_RANDOMLY_MOVE_MOUSE = 0.002
 
 class ClickLocation:
 
-	MARGIN_FOR_ERROR_PX = 3
+	# must be an int
+	MARGIN_FOR_ERROR_PX = 1
 
 	def __init__(self, original_location):
 		'''
@@ -64,8 +65,8 @@ def setup_click_location():
 
 def get_sleep_time():
 	# distribution params
-	mus = [0.8, 0.6, 1.1]
-	sigmas = [0.2, 0.3, 0.4]
+	mus = [0.6, 1.2, 1.5]
+	sigmas = [0.1, 0.2, 0.3]
 
 	# randomly select a distribution 
 	mu = random.choice(mus)
